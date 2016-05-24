@@ -1,0 +1,80 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+    <h1>Alumnos:</h1>
+     <h:form prependId="false">
+    <p:selectOneMenu value="#{inscribirAlumnoBean.idAlumno}" size="3">
+    	<f:selectItems value="#{inscribirAlumnoBean.listaAlumnos}" var="a" itemLabel="#{a.nombre} #{a.email}" itemValue="#{a.idAlumno}"/><br/>
+    </p:selectOneMenu><br/>
+		<h:commandButton action="#{inscribirAlumnoBean.seleccionarAlumno()}" value="Seleccionar Alumno">
+		<f:ajax execute="@form" render="tabla tabla2"/>
+		</h:commandButton>
+
+    <h2>Alumno:</h2>
+
+	<p:dataTable id="tabla" var="alu" value="#{inscribirAlumnoBean.al}" style="width:400px">
+		<p:column>
+			<f:facet name="header">Nombre</f:facet>
+			<p:outputLabel value="#{alu.nombre}"/>
+		</p:column>
+		<p:column>
+			<f:facet name="header">Apellidos</f:facet>
+			<p:outputLabel value="#{alu.apellidos}"/>
+		</p:column>
+		<p:column>
+			<f:facet name="header">Dni</f:facet>
+			<p:outputLabel value="#{alu.dni}"/>
+		</p:column>
+	</p:dataTable>
+	<br/>
+	<p:dataTable id="tabla2" var="mat" value="#{inscribirAlumnoBean.listaMatriculas}" style="width:400px">
+		<p:column>
+			<f:facet name="header">Curso</f:facet>
+			<p:outputLabel value="#{mat.curso.nombre}"/>
+		</p:column>
+		<p:column>
+			<f:facet name="header">Notas</f:facet>
+			<p:outputLabel value="#{mat.nota}"/>
+		</p:column>
+	</p:dataTable>
+<br/><br/><br/><br/><br/>
+
+    <p:selectOneMenu value="#{inscribirAlumnoBean.idCurso}" size="3">
+    	<f:selectItems value="#{inscribirAlumnoBean.listaCursos}" var="c" itemLabel="#{c.nombre}" itemValue="#{c.idCurso}"/><br/>
+	  </p:selectOneMenu><br/>
+    	<h:commandButton action="#{inscribirAlumnoBean.seleccionarCurso()}" value="Seleccionar Curso">
+    	<f:ajax execute="@form" render="tabla3"/>
+		</h:commandButton>
+     <p:dataTable id="tabla3" var="c" value="#{inscribirAlumnoBean.cur}" style="width:500px">
+		<p:column>
+			<f:facet name="header">Nombre</f:facet>
+			<p:outputLabel value="#{c.nombre}"/>
+		</p:column>
+		<p:column>
+			<f:facet name="header">Fecha de inicio</f:facet>
+			<p:outputLabel value="#{c.fechaIni}"/>
+		</p:column>
+		<p:column>
+			<f:facet name="header">Fecha de final</f:facet>
+			<p:outputLabel value="#{c.fechaFin}"/>
+		</p:column>
+		<p:column>
+			<f:facet name="header">Plazas</f:facet>
+			<p:outputLabel value="#{c.plazasLibres}"/>
+		</p:column>
+	  </p:dataTable>
+		<h:commandButton action="#{inscribirAlumnoBean.registrar()}" value="INSCRIBIR"/>
+ 		</h:form>
+		<br/><br/>
+ 		<p:link value="volver" outcome="inicio"/>
+
+</h:body>
+</html>
+

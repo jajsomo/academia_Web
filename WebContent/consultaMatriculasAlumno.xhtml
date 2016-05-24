@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui"
+      >
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <h:form prependId="false">
+        <h1>Alumnos:</h1>
+         <p:selectOneMenu value="#{consultarMatriculasAlumnoBean.idAlumno}" >
+    		<f:selectItems value="#{consultarMatriculasAlumnoBean.listaAlumnos}" var="a" itemLabel="#{a.nombre} #{a.apellidos} #{a.dni} #{a.email}" itemValue="#{a.idAlumno}" style="width:125px"/><br/>
+	   	</p:selectOneMenu><br/><br/>
+		<h:commandButton action="#{consultarMatriculasAlumnoBean.seleccionarAlumno()}" value="enviar">
+			<f:ajax execute="@form" render="tabla"/>
+		</h:commandButton>
+ 
+        </h:form>
+        
+    	   <h1>Matriculas: <h:outputText value="#{consultarMatriculasAlumnoBean.al.nombre}" /> </h1>
+      		<p:dataTable id="tabla" var="m" value="#{consultarMatriculasAlumnoBean.listaMatriculas}">
+			<p:column>
+				<f:facet name="header">Nombre</f:facet>
+				<p:outputLabel value="#{m.curso.nombre}"/>
+			</p:column>
+			<p:column>
+				<f:facet name="header">Fecha de inicio</f:facet>
+				<p:outputLabel value="#{m.curso.fechaIni}"/>
+			</p:column>
+			<p:column>
+				<f:facet name="header">Fecha de final</f:facet>
+				<p:outputLabel value="#{m.curso.fechaFin}"/>
+			</p:column>
+			</p:dataTable>  
+
+		 <p:link outcome="inicio" value="Volver"/>
+
+</h:body>
+</html>
+

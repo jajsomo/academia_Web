@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      >
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <h:form prependId="false">
+        	Nombre:<h:inputText id="nombre" value="#{registroAlumnoBean.alumno.nombre}" required="true"/><br/>
+        	Apellidos:<h:inputText id="apellidos" value="#{registroAlumnoBean.alumno.apellidos}" required="true"/><br/>
+        	Password:<h:inputSecret id="psw1" value="#{registroAlumnoBean.alumno.password}" required="true"/><br/>
+        	Repetir Password:<h:inputSecret id="psw2" value="#{registroAlumnoBean.rptPwd}">
+        	<f:validator validatorId="vPassword"/>
+        	</h:inputSecret><h:message for="psw2"/> <br/><br/>
+        	Edad:<h:inputText id="edad" value="#{registroAlumnoBean.alumno.edad}"/><br/>
+			Dni:<h:inputText id="dni" value="#{registroAlumnoBean.alumno.dni}" required="true"/><br/>
+        	Email:<h:inputText id="email" value="#{registroAlumnoBean.alumno.email}" required="true">
+        			<f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+        		</h:inputText><h:message for="email"/><br/>
+        	Telefono:<h:inputText id="telefono" value="#{registroAlumnoBean.alumno.telefono}">
+        			<f:validateLongRange minimum="0"/>
+        		</h:inputText><h:message for="telefono"/><br/>
+        	<h:commandButton value="Registrar" action="#{registroAlumnoBean.insertarAlumno()}"/>        
+        </h:form>
+        <br/>
+        
+    </h:body>
+</html>
+

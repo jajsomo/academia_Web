@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+      
+    <h1>Usuario:  ${loginBean.usuario}</h1>
+	  	<h:form prependId="false">
+		<h1>Matriculas: <h:outputText value="#{matricularBean.al.nombre}" /> </h1>
+		<h1>Cursos Disponibles: <h:outputText value="#{matricularBean.cursos.size()}" /> </h1>
+        	 
+		<p:dataTable id="tabla" var="cur" value="#{matricularBean.cursos}">
+		<p:column>
+			<f:facet name="header"></f:facet>
+			<h:commandButton value="Eliminar" action="#{matricularBean.borrarCurso(cur)}"/>
+		</p:column>
+		<p:column>
+			<f:facet name="header">Nombre</f:facet>
+			<p:outputLabel value="#{cur.nombre}"/>
+		</p:column>
+		<p:column>
+			<f:facet name="header">Fecha de inicio</f:facet>
+			<p:outputLabel value="#{cur.fechaIni}"/>
+		</p:column>
+		<p:column>
+			<f:facet name="header">Fecha de final</f:facet>
+			<p:outputLabel value="#{cur.fechaFin}"/>
+		</p:column>
+		<p:column>
+			<f:facet name="header">Plazas</f:facet>
+			<p:outputLabel value="#{cur.plazasLibres}"/>
+		</p:column>
+		</p:dataTable>
+
+			</h:form>
+    <p:link value="volver" outcome="alumno"/>
+</h:body>
+</html>
+

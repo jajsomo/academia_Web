@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui" 
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+ <h:form id="form">
+   <p:dataTable id="cursos" var="cur" value="#{ponerNotasBean.listaCursos}" selectionMode="single"
+  selection="#{ponerNotasBean.selectedCurso}" rowKey="#{cur.idCurso}" paginator="true" rows="5"
+                rowsPerPageTemplate="5,10,15,20,25">
+        <f:facet name="header">
+            Cursos
+        </f:facet>
+        <p:ajax event="rowSelect" listener="#{ponerNotasBean.seleccionaCurso}" update=":form:matriculas :form:curs" />
+        <p:ajax event="rowUnselect" listener="#{ponerNotasBean.seleccionaCurso}" update=":form:matriculas :form:curs" />
+        <p:column headerText="Id Curso">
+            <h:outputText value="#{cur.idCurso}" />
+        </p:column>
+        <p:column>
+				    <f:facet name="header"><h:outputText value="Nombre"/></f:facet>
+				    <h:outputText value="#{cur.nombre}"/>
+			    </p:column>
+			    <p:column>
+					<f:facet name="header"><h:outputText value="Fecha inicio"/></f:facet>
+					<h:outputText value="#{cur.fechaIni}"/>
+				</p:column>
+  		        <p:column>
+		           <f:facet name="header"><h:outputText value="Fecha Final"/></f:facet>
+		           <h:outputText value="#{cur.fechaFin}"/>
+		       </p:column>
+    </p:dataTable>
+    <br/><br/><br/>
+      <p:dataTable id="matriculas" var="mat" value="#{ponerNotasBean.listaMatriculas}" selectionMode="single"
+  		selection="#{ponerNotasBean.selectedMatricula}"  rowKey="#{mat.idMatriculas}" paginator="true" rows="5"
+                rowsPerPageTemplate="5,10,15,20,25">
+      
+        <f:facet name="header">
+            Alumnos
+        </f:facet>
+        <p:ajax event="rowSelect" listener="#{ponerNotasBean.seleccionaAlumno}" update=":form:cursos :form:alum" />
+        <p:ajax event="rowUnselect" listener="#{ponerNotasBean.seleccionaAlumno}" update=" :form:cursos :form:alum" />
+      <p:column headerText="Matricula">
+            <h:outputText value="#{mat.idMatriculas}" />
+        </p:column>
+   	     <p:column>
+		    <f:facet name="header"><h:outputText value="Nombre"/></f:facet>
+		    <h:outputText value="#{mat.alumno.nombre}"/>
+	    </p:column>
+        <p:column>
+		    <f:facet name="header"><h:outputText value="Apellidos"/></f:facet>
+		    <h:outputText value="#{mat.alumno.apellidos}"/>
+	    </p:column>
+        <p:column>
+		    <f:facet name="header"><h:outputText value="dni"/></f:facet>
+		    <h:outputText value="#{mat.alumno.dni}"/>
+	    </p:column>
+			
+    </p:dataTable>
+    Curso: <h:outputText id="curs" value="#{ponerNotasBean.selectedCurso.nombre}" /><br/>
+    Alumno: <h:outputText id="alum" value="#{ponerNotasBean.matricula.alumno.nombre} #{ponerNotasBean.matricula.alumno.apellidos}" /><br/>
+    Nota: <p:inputText id="nota" value="#{ponerNotasBean.nota}"></p:inputText><br/>
+    <h:commandButton action="#{ponerNotasBean.ponerNotas()}" value="enviar"/>
+     
+</h:form>
+   <h:link value="volver" outcome="inicio"/>
+</h:body>
+</html>
+

@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+       xmlns:p="http://primefaces.org/ui"
+    >
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+    
+       <h:form prependId="false">
+    
+     		Nombre del curso:<p:inputText value="#{cursoBean.curso.nombre}" required="true"/><br/>
+      		Fecha Inicio:<p:calendar value="#{cursoBean.curso.fechaIni}" required="true"/><br/>
+      		Fecha final:<p:calendar value="#{cursoBean.curso.fechaFin}" required="true"/><br/>
+      		Plazas:<p:inputText value="#{cursoBean.curso.plazas}" required="true"/><br/>
+        	<h:commandButton value="Registrar" action="#{cursoBean.registrarCurso()}"/>        
+        </h:form>
+        
+    </h:body>
+</html>
+
